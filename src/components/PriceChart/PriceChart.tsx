@@ -78,12 +78,43 @@ export const PriceChart: React.FC<{ currencyPair: string }> = ({
   };
 
   // Опции для графика
-  const options = {
+  const options: {
+    responsive: boolean;
+    plugins: {
+      tooltip: {
+        enabled: boolean;
+        mode: 'index' | 'dataset' | 'point' | 'nearest' | 'x' | 'y'; 
+        intersect: boolean;
+        callbacks: {
+          label: (context: TooltipItem<'line'>) => string;
+        };
+      };
+    };
+    scales: {
+      x: {
+        type: 'time'; 
+        time: {
+          unit: 'minute';
+          tooltipFormat: 'HH:mm:ss';
+        };
+        title: {
+          display: boolean;
+          text: string;
+        };
+      };
+      y: {
+        title: {
+          display: boolean;
+          text: string;
+        };
+      };
+    };
+  } = {
     responsive: true,
     plugins: {
       tooltip: {
         enabled: true,
-        mode: 'index', // Убрано приведение типа
+        mode: 'index', 
         intersect: false,
         callbacks: {
           label: function (context: TooltipItem<'line'>) {
@@ -96,20 +127,20 @@ export const PriceChart: React.FC<{ currencyPair: string }> = ({
     },
     scales: {
       x: {
-        type: "time",  // Используем точное значение "time"
+        type: 'time', 
         time: {
-          unit: "minute",
-          tooltipFormat: "HH:mm:ss",
+          unit: 'minute',
+          tooltipFormat: 'HH:mm:ss',
         },
         title: {
           display: true,
-          text: "Time",
+          text: 'Time',
         },
       },
       y: {
         title: {
           display: true,
-          text: "Price",
+          text: 'Price',
         },
       },
     },

@@ -83,7 +83,7 @@ export const PriceChart: React.FC<{ currencyPair: string }> = ({
     plugins: {
       tooltip: {
         enabled: true,
-        mode: 'index' as 'index',
+        mode: 'index', // Убрано приведение типа
         intersect: false,
         callbacks: {
           label: function (context: TooltipItem<'line'>) {
@@ -114,6 +114,7 @@ export const PriceChart: React.FC<{ currencyPair: string }> = ({
       },
     },
   };
+  
   
   
   

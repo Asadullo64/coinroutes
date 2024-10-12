@@ -12,6 +12,11 @@ interface Trade {
   status: 'open' | 'closed';
 }
 
+interface TickerData {
+  type: string;
+  price: string; // или number в зависимости от данных
+}
+
 export const TradePanel: React.FC<{ currencyPair: string }> = ({ currencyPair }) => {
   const [price, setPrice] = useState('');
   const [size, setSize] = useState('');
@@ -26,7 +31,7 @@ export const TradePanel: React.FC<{ currencyPair: string }> = ({ currencyPair })
   const [deposit, setDeposit] = useState<number>(10000);
 
   useEffect(() => {
-    const unsubscribe = subscribeToOrderBook(currencyPair, (data: any) => {
+    const unsubscribe = subscribeToOrderBook(currencyPair, (data: TickerData) => {
       if (data.type === 'ticker') {
         const price = parseFloat(data.price);
         setCurrentPrice(price);

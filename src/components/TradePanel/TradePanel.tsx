@@ -3,6 +3,15 @@ import React, { useState, useEffect } from 'react';
 import { subscribeToOrderBook } from '@/service/websocket';
 import styles from './TradePanel.module.scss';
 
+// Определение интерфейсов
+interface Trade {
+  type: 'buy' | 'sell';
+  price: number;
+  size: number;
+  time: string;
+  status: 'open' | 'closed';
+}
+
 export const TradePanel: React.FC<{ currencyPair: string }> = ({ currencyPair }) => {
   const [price, setPrice] = useState('');
   const [size, setSize] = useState('');
@@ -13,7 +22,7 @@ export const TradePanel: React.FC<{ currencyPair: string }> = ({ currencyPair })
   const [tradeStatus, setTradeStatus] = useState<string | null>(null);
   const [recommendedStopLoss, setRecommendedStopLoss] = useState<number | null>(null);
   const [recommendedTakeProfit, setRecommendedTakeProfit] = useState<number | null>(null);
-  const [trades, setTrades] = useState<any[]>([]);
+  const [trades, setTrades] = useState<Trade[]>([]);
   const [deposit, setDeposit] = useState<number>(10000);
 
   useEffect(() => {
@@ -21,19 +30,15 @@ export const TradePanel: React.FC<{ currencyPair: string }> = ({ currencyPair })
       if (data.type === 'ticker') {
         const price = parseFloat(data.price);
         setCurrentPrice(price);
-        setPriceHistory(prevHistory => [...prevHistory, price]);
+        setPriceHistory((prevHistory) => [...prevHistory, price]);
 
-        if (priceHistory.length >= 2) {
+        // Определение рекомендаций для стоп-лосса и тейк-профита
+        if (priceHistory.length > 1) {
           const lastPrice = priceHistory[priceHistory.length - 1];
           const secondLastPrice = priceHistory[priceHistory.length - 2];
 
-          if (lastPrice > secondLastPrice) {
-            setRecommendedTakeProfit(lastPrice * 1.01);
-            setRecommendedStopLoss(lastPrice * 0.99);
-          } else {
-            setRecommendedTakeProfit(lastPrice * 1.01);
-            setRecommendedStopLoss(lastPrice * 0.98);
-          }
+          setRecommendedTakeProfit(lastPrice > secondLastPrice ? lastPrice * 1.01 : lastPrice * 1.01);
+          setRecommendedStopLoss(lastPrice > secondLastPrice ? lastPrice * 0.99 : lastPrice * 0.98);
         }
       }
     });
@@ -45,13 +50,12 @@ export const TradePanel: React.FC<{ currencyPair: string }> = ({ currencyPair })
 
   const handleBuy = () => {
     const totalCost = parseFloat(price) * parseFloat(size);
-    
-    // Проверка валидности данных
+
     if (!currentPrice) {
       setTradeStatus('Current price is not available.');
       return;
     }
-    
+
     if (!size || isNaN(totalCost) || totalCost <= 0) {
       setTradeStatus('Invalid size entered.');
       return;
@@ -59,7 +63,7 @@ export const TradePanel: React.FC<{ currencyPair: string }> = ({ currencyPair })
 
     if (totalCost <= deposit) {
       const timestamp = new Date().toLocaleTimeString();
-      const newTrade = {
+      const newTrade: Trade = {
         type: 'buy',
         price: parseFloat(price),
         size: parseFloat(size),
@@ -77,7 +81,6 @@ export const TradePanel: React.FC<{ currencyPair: string }> = ({ currencyPair })
   const handleSell = () => {
     const totalProceeds = parseFloat(price) * parseFloat(size);
 
-    // Проверка валидности данных
     if (!currentPrice) {
       setTradeStatus('Current price is not available.');
       return;
@@ -89,7 +92,7 @@ export const TradePanel: React.FC<{ currencyPair: string }> = ({ currencyPair })
     }
 
     const timestamp = new Date().toLocaleTimeString();
-    const newTrade = {
+    const newTrade: Trade = {
       type: 'sell',
       price: parseFloat(price),
       size: parseFloat(size),
@@ -112,7 +115,7 @@ export const TradePanel: React.FC<{ currencyPair: string }> = ({ currencyPair })
         profitOrLoss = trade.price - (currentPrice || 0);
       }
 
-      setDeposit(prevDeposit => prevDeposit + profitOrLoss * trade.size);
+      setDeposit((prevDeposit) => prevDeposit + profitOrLoss * trade.size);
       const updatedTrades = [...trades];
       updatedTrades[index].status = 'closed';
       setTrades(updatedTrades);
@@ -120,14 +123,14 @@ export const TradePanel: React.FC<{ currencyPair: string }> = ({ currencyPair })
     }
   };
 
-  const getTradeColor = (trade: any) => {
+  const getTradeColor = (trade: Trade) => {
     if (currentPrice !== null) {
       if (trade.type === 'buy' && currentPrice > trade.price) {
-        return styles.tradePanel__tradeItem_profit; 
+        return styles.tradePanel__tradeItem_profit;
       } else if (trade.type === 'sell' && currentPrice < trade.price) {
-        return styles.tradePanel__tradeItem_profit; 
+        return styles.tradePanel__tradeItem_profit;
       } else {
-        return styles.tradePanel__tradeItem_loss; 
+        return styles.tradePanel__tradeItem_loss;
       }
     }
     return styles.tradePanel__tradeItem_neutral;
@@ -212,7 +215,9 @@ export const TradePanel: React.FC<{ currencyPair: string }> = ({ currencyPair })
         </ul>
       </div>
 
-      <h4>Current Deposit: ${deposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}</h4>
+      <div className={styles.tradePanel__deposit}>
+        <h4>Current Deposit: ${deposit.toFixed(1)}</h4>
+      </div>
     </div>
   );
 };

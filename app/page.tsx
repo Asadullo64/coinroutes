@@ -4,6 +4,11 @@ import React, { useEffect, useState } from "react";
 import { subscribeToOrderBook } from "@/service/websocket";
 import { CurrencyDropdown, PriceChart, TradePanel } from "@/src/components";
 
+interface OrderBookData {
+  type: string;
+  price: string;
+}
+
 const HomePage: React.FC = () => {
   const [currencyPair, setCurrencyPair] = useState("BTC-USD"); // Начальная валютная пара
   const [currentPrice, setCurrentPrice] = useState<number | null>(null);
@@ -13,13 +18,13 @@ const HomePage: React.FC = () => {
   };
 
   useEffect(() => {
-    const unsubscribe = subscribeToOrderBook(currencyPair, (data: any) => {
-      if (data.type === "ticker") {
+    const unsubscribe = subscribeToOrderBook(currencyPair, (data: OrderBookData) => {
+      if (data.type === 'ticker') {
         const price = parseFloat(data.price);
         setCurrentPrice(price);
       }
     });
-
+  
     return () => {
       unsubscribe();
     };

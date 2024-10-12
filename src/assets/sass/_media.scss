@@ -1,0 +1,32 @@
+// Here, you can see the basic media queries for a more enjoyable and responsive user experience.
+
+@import './variables';
+
+@mixin x-small {
+  @media (min-width: $x-small) {
+    @content;
+  }
+}
+
+@mixin small {
+  @media (min-width: $small) {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media (min-width: $medium) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media (min-width: $large) {
+    @content;
+  }
+}
+@mixin x-large {
+  @media (min-width: $x-large) {
+    @content;
+  }
+}

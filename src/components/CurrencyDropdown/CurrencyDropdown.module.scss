@@ -1,0 +1,39 @@
+@import "@/src/assets/sass/variables.scss";
+@import "@/src/assets/sass/media";
+
+
+.currency-dropdown {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+  max-width: 300px; // Установи максимальную ширину контейнера
+  width: 100%; // Ширина 100% от родителя
+
+  label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+
+  select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #fff;
+    transition: border-color 0.3s;
+    width: 100%; // Устанавливаем ширину на 100% от родительского контейнера
+
+    &:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    option {
+      background-color: #fff;
+      color: #333;
+    }
+  }
+}

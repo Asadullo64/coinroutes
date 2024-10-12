@@ -1,0 +1,41 @@
+// This file sets up the container grid system for different screen sizes.
+// It uses media queries to ensure the layout is responsive and adjusts smoothly
+// for various devices. The widths are calculated dynamically to provide consistent
+// spacing and proper scaling across all breakpoints.
+
+// The container starts with a default width and auto margins to center the content.
+// As the screen size changes, the container width is recalculated to fit the specific
+// size class (x-small, small, medium, large, x-large), ensuring everything is
+// properly aligned and displayed according to the design.
+//          Asadullo
+
+@import './media';
+
+.container {
+  width: $x-large-container;
+  margin-inline: auto;
+
+  @include x-small {
+    $percentage: calc($x-small-container / $x-small * 100%);
+    width: clamp($x-small-container, $percentage, $small-container);
+  }
+
+  @include small {
+    $percentage: calc($small-container / $small * 100%);
+    width: clamp($small-container, $percentage, $medium-container);
+  }
+
+  @include medium {
+    $percentage: calc($medium-container / $medium * 100%);
+    width: clamp($medium-container, $percentage, $large-container);
+  }
+
+  @include large {
+    $percentage: calc($large-container / $large * 100%);
+    width: clamp($large-container, $percentage, $x-large-container);
+  }
+
+  @include x-large {
+    width: $x-large-container;
+  }
+}

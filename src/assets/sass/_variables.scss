@@ -1,0 +1,98 @@
+// This variable is a basic setup to ensure that anyone viewing my code understands its purpose. It helps manage colors and pixel values consistently across the project, preventing incorrect pixel usage in certain places. This approach keeps the code accurate and maintains proper focus.
+//* colors
+// Основные цвета
+$primary-color: #2797ff;
+$primary-light-color: #66b5ff;
+$primary-dark-color: #0076e2;
+
+// Второстепенные цвета
+$black-color: #1e1e1e;
+$grey-color: #d1d1d1;
+$grey-dark-color: #7e7e7e;
+$grey-light-color: #ececec;
+$white-color: #ffffff;
+
+// Другие цвета
+$yellow-color: #ffc331;
+$yellow-opacity-color: rgba(255, 195, 49, 0.55);
+$red-color: #ed4c5c;
+$purple-color: #8244f7;
+$purple-light-color: #ebeaff;
+
+//* screen
+$x-small: 22.5rem; // 360px
+$small: 30rem; // 480px
+$medium: 48rem; // 768px
+$large: 48rem; // 768px
+$x-large: 90rem; // 1440px
+$xx-large: 0;
+
+//* grid
+$x-small-container: 20rem; // 320px
+$small-container: 27.5rem; // 440px
+$medium-container: 48.125rem; // 770px
+$large-container: 62.5rem; // 1000px
+$x-large-container: 80rem; // 1280px
+
+//* line-hight
+$line-height-primary: 1.2; // 120% / 100
+$line-height-secondary: 1.4; // 140% / 100
+
+//* border-radius
+//? x-large, small
+$radius-primary: 1.25rem; // 20px
+$radius-secondary: 0.9375rem; // 15px
+$radius-tertiary: 0.625rem; // 10px
+$radius-quaternary: 0.3125rem; // 5px
+
+//? x-small
+$x-small-radius-tertiary: 0.5rem; // 8px
+
+//* border-size
+$border-width-primary: 0.1875rem; // 3px
+$border-width-secondary: 0.125rem; // 2px
+$border-width-tertiary: 0.0625rem; // 1px
+
+//* typography
+//? font-weight
+$font-regular: 400;
+$font-medium: 500;
+$font-bold: 700;
+
+//? font-size
+//? desktop
+$desktop-h1-size: 2.5rem; // 40px
+$desktop-h2-size: 2rem; // 32px
+$desktop-h3-size: 1.5625rem; // 25px
+$desktop-h4-size: 1.25rem; // 20px
+$desktop-paragraph-size: 1rem; // 16px
+$desktop-subtext-size: 0.75rem; // 12px
+
+//? mobile (small)
+$mobile-h1-size: 2.1875rem; // 35px
+$mobile-h2-size: 1.75rem; // 28px
+$mobile-h3-size: 1.375rem; // 22px
+$mobile-h4-size: 1.125rem; // 18px
+$mobile-paragraph-size: 0.875rem; // 14px
+$mobile-subtext-size: 0.625rem; // 10px
+
+//? x-small
+$x-small-h1-size: 1.5625rem; // 25px
+$x-small-h2-size: 1.25rem; // 20px
+$x-small-h3-size: 1.125rem; // 18px
+$x-small-h4-size: 0.875rem; // 14px
+$x-small-paragraph-size: 0.75rem; // 12px
+$x-small-subtext-size: 0.625rem; // 10px
+
+//* margin / padding
+//? desktop
+$card-padding: 1.5625rem; // 25px
+$block-spacing: 6.25rem; // 100px
+$content-padding-top: 3.125rem; // 50px
+
+//? small, x-small
+$mobile-block-spacing: 3.125rem; // 50px
+$mobile-content-padding-top: 1.875rem; // 30px
+
+//? x-small
+$x-small-card-padding: 0.9375rem; // 15px

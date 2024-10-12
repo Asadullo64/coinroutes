@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import styles from './CurrencyDropdown.module.scss'; // Измени на реальный путь к файлу
+import styles from './CurrencyDropdown.module.scss'; 
 
 interface CurrencyDropdownProps {
   onPairChange: (pair: string) => void;

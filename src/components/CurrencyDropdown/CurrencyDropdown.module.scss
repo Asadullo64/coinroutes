@@ -1,13 +1,12 @@
 @import "@/src/assets/sass/variables.scss";
 @import "@/src/assets/sass/media";
 
-
 .currency-dropdown {
   display: flex;
   flex-direction: column;
   margin: 1rem 0;
-  max-width: 300px; // Установи максимальную ширину контейнера
-  width: 100%; // Ширина 100% от родителя
+  max-width: 300px;
+  width: 100%;
 
   label {
     font-weight: bold;
@@ -23,7 +22,7 @@
     color: #333;
     background-color: #fff;
     transition: border-color 0.3s;
-    width: 100%; // Устанавливаем ширину на 100% от родительского контейнера
+    width: 100%;
 
     &:focus {
       outline: none;
@@ -35,5 +34,18 @@
       background-color: #fff;
       color: #333;
     }
+  }
+
+  @include small {
+    max-width: 100%;
+    select {
+      font-size: 0.875rem;
+      padding: 0.4rem;
+    }
+  }
+
+  @include large {
+    margin: 20px auto;
+    max-width: 300px;
   }
 }

@@ -14,7 +14,7 @@ interface Trade {
 
 interface TickerData {
   type: string;
-  price: string; // или number в зависимости от данных
+  price: string; 
 }
 
 export const TradePanel: React.FC<{ currencyPair: string }> = ({ currencyPair }) => {

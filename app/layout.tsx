@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'CoinRoutes App',
-  description: 'Crypto data visualization',
+  description: 'Crypto data visualization by Asadullo',
 };
 
 export default function RootLayout({

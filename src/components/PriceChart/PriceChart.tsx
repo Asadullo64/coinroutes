@@ -29,7 +29,7 @@ Chart.register(
 // Интерфейс для данных из вебсокета
 interface OrderBookMessage {
   type: string;
-  price: string; // Если данные приходят в строковом формате
+  price: string; 
 }
 
 export const PriceChart: React.FC<{ currencyPair: string }> = ({
@@ -42,7 +42,7 @@ export const PriceChart: React.FC<{ currencyPair: string }> = ({
   useEffect(() => {
     const handleOrderBookMessage = (data: OrderBookMessage) => {
       if (data.type === "ticker") {
-        const price = parseFloat(data.price); // Преобразуем цену в число
+        const price = parseFloat(data.price); 
         const timestamp = Date.now();
         setPriceData((prevData) => [...prevData, { price, time: timestamp }]);
       }
@@ -58,7 +58,6 @@ export const PriceChart: React.FC<{ currencyPair: string }> = ({
     };
   }, [currencyPair]);
 
-  // Обрезаем данные до последних 50 записей
   const displayedPriceData = priceData.slice(-50);
 
   // Данные для графика

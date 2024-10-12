@@ -1,4 +1,3 @@
-// redux/slices/orderBookSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface OrderBookState {

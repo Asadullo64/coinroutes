@@ -1,10 +1,8 @@
 const SOCKET_URL = 'wss://ws-feed-public.sandbox.exchange.coinbase.com';
 
-// Интерфейс для данных из вебсокета
 interface TickerMessage {
   type: string;
-  price: string; // Цена в строковом формате
-  // Добавьте другие поля, если они вам нужны
+  price: string; 
 }
 
 export const subscribeToOrderBook = (
